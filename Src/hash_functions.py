@@ -10,10 +10,6 @@ class HashFunctions:
     """
     Pure Python MurmurHash3 (32-bit).
     """
-
-    def __init__(self):
-        pass
-
     def murmur3_32(self: str, seed: int = 0) -> int:
         data = bytearray(self.encode())
         length = len(data)
