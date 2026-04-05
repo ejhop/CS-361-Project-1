@@ -7,7 +7,6 @@ MurmurHash3-based hashing for Bloom filters.
 
 
 class HashFunctions:
-
     """
     Pure Python MurmurHash3 (32-bit).
     """
@@ -85,3 +84,40 @@ class HashFunctions:
         h1 = HashFunctions.hash1(self)
         h2 = HashFunctions.hash2(self)
         return [(h1 + i * h2) % m for i in range(k)]
+
+
+#     """
+#     Tests hash functions
+#     """
+#     @staticmethod
+#     def test_hash_functions():
+#         print("Running hash function tests...\n")
+#
+#         k = 7
+#         m = 1_000_000
+#
+#         x1 = "Happy"
+#         x2 = "Easter"
+#
+#         # 1. Exactly k indices
+#         idx1 = HashFunctions.bloom_hashes(x1, k, m)
+#         print("1. Returned k indices:", len(idx1) == k, f"(got {len(idx1)})")
+#
+#         # 2. All indices in range
+#         in_range = all(0 <= i < m for i in idx1)
+#         print("2. All indices within [0, m):", in_range)
+#
+#         # 3. Deterministic
+#         idx1_again = HashFunctions.bloom_hashes(x1, k, m)
+#         deterministic = (idx1 == idx1_again)
+#         print("3. Deterministic output:", deterministic)
+#
+#         # 4. Different inputs → different indices
+#         idx2 = HashFunctions.bloom_hashes(x2, k, m)
+#         different = (idx1 != idx2)
+#         print("4. Different inputs give different indices:", different)
+#
+#         print("\nHash function tests complete.")
+#
+#
+# HashFunctions.test_hash_functions()
